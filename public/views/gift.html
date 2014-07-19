@@ -1,0 +1,12 @@
+<section data-ng-controller="GiftController">
+  <h1>For Him:</h1>
+  <ul id="gift-list">
+      <li class="gift well" ng-repeat="gift in gifts">
+        <a ng-href={{gift.DetailPageURL}}>
+            <img ng-src={{gift.MediumImage.URL}}>
+            <p>{{gift.ItemAttributes.Title}}</p>
+            <p class="price">{{gift.ItemAttributes.ListPrice.FormattedPrice}}</p>
+          </a>
+      </li>
+    </ul>
+</section>

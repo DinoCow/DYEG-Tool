@@ -1,0 +1,14 @@
+{
+	"name":"JukeBox",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+		"aws-lib": "",
+		"consolidate": "~0.10.0",
+		"express":"~3.4.7",
+		"mongoose": "~3.8.3",
+		"swig": "~1.3.2",
+	    "underscore":"~1.5.2",
+    	"xml2js": "0.1.x"   
+	}
+}

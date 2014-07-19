@@ -1,0 +1,24 @@
+<section data-ng-controller="IndexController">
+<h1 style="float:left">Customer Order</h1>
+	<a href="/#!/order/new" class="btn btn-primary" style="float:right;margin-top:30px" > New Order +</a>
+	<table style="clear:both" class="table table-responsive table-hover">
+		<thead>
+			<tr>
+	 			<th>Id</th>
+	  			<th>Date Created</th> 
+				<th>Order Info</th>
+				<th>Owner</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+	  		<tr ng-click="go(order)" ng-repeat="order in orders">
+	  			<td>{{order._id}}</td>
+	  			<td>{{order.dateCreated}}</td> 
+	  			<td>{{order.gifter.name}} for {{order.occasion}}</td>
+	  			<td>{{order.owner}}</td>
+	  			<td>{{order.status}}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

@@ -1,0 +1,18 @@
+.gift{
+    border:1px;
+    height:320px;
+    float:left;
+    padding: 20px;
+    margin-right: 20px;
+    width: 200px;
+    position:relative;
+}
+
+.price{
+	position:absolute;
+	bottom:0;
+}
+
+#gift-list{
+    list-style-type: none;
+}
