@@ -1,58 +1,59 @@
 <section data-ng-controller="NewOrderController">
 	<h1 style="float:left">New Order</h1>
-	<form style="clear:both">
+	<form style="clear:both; width:50%;" data-ng-submit='save()'>
 		<div class="form-group">
-		    <label for="owner">Owner</label>
-		    <input type="text" class="form-control" id="owner"/>
+		    <label class="neworder-label" for="owner">Owner</label>
+		    <input type="text" class="form-control neworder-field" data-ng-model='owner' id="owner"/>
 		</div>
 		<div class="form-group">
-		    <label for="name">Name</label>
-		    <input type="text" class="form-control" id="name"/>
+		    <label class="neworder-label" for="name">Name</label>
+		    <input type="text" data-ng-model='name' class="form-control neworder-field" id="name"/>
 		</div>
 		<div class="form-group">
-		    <label for="gender">Gender</label>
-		    <select class="form-control" id="gender">
+		    <label class="neworder-label" for="gender">Gender</label>
+		    <select class="form-control neworder-field" ng-model='gender' id="gender">
 		    	<option value="Male">Male</option>
 		  		<option value="Female">Female</option>
 		    </select>
 		</div>
 		<div class="form-group">
-		    <label for="dueDate">Date due</label>
-		    <input type="text" class="form-control" id="dueDate"/>
+		    <label class="neworder-label" for="dueDate">Date due</label>
+		    <input type="Date" class="form-control neworder-field" data-ng-model='dueDate' id="dueDate"/>
 		</div>
 		<div class="form-group">
-		    <label for="age">Age</label>
-		    <input type="text" class="form-control" id="age"/>
+		    <label class="neworder-label" for="age">Age</label>
+		    <input type="number" data-ng-model='age' class="form-control neworder-field" id="age"/>
 		</div>
 
-		<hr/>
+		<hr style="clear:both; margin-top:20px;"/>
 
-		<h3> Recipent</h3>
+		<h3 style="clear:both"> Recipient</h3>
 		<div class="form-group">
-		    <label for="occasion">Occasion</label>
-		    <input type="text" class="form-control" id="occasion"/>
+		    <label class="neworder-label" for="occasion">Occasion</label>
+		    <input type="text" data-ng-model='occasion' class="form-control neworder-field" id="occasion"/>
 		</div>
 		<div class="form-group">
-		    <label for="recipent-gender">Gender</label>
-		    <select class="form-control" id="recipent-gender">
+		    <label class="neworder-label" for="recipent-gender">Gender</label>
+		    <select class="form-control neworder-field"  ng-model="recipientGender" id="recipient-gender">
 		    	<option value="Male">Male</option>
 		  		<option value="Female">Female</option>
 		    </select>
 		</div>
 		<div class="form-group">
-		    <label for="recipent-age">Age</label>
-		    <input type="text" class="form-control" id="recipent-age"/>
+		    <label class="neworder-label" for="recipent-age">Age</label>
+		    <input type="number" data-ng-model='recipientAge' class="form-control neworder-field" id="recipent-age"/>
 		</div>
 		<div class="form-group">
-		    <label for="interests">Interests</label>
-		    <input type="text" class="form-control" id="interests" placeholder="Hockey;Dance;Hiking;Fishing;Eating"/>
+		    <label class="neworder-label" for="interests">Interests</label>
+		    <input type="text" data-ng-model='interests' class="form-control neworder-field" id="interests" placeholder="Hockey;Dance;Hiking;Fishing;Eating"/>
 		</div>
 
-		<div class="form-group">
-		    <label for="info">Important Information</label>
-		    <input type="textarea" class="form-control" id="info" placeholder="Important detail about their personality which could turn into a factory when selecting gift ideas."/>
+		<div class="form-group ">
+		    <label class="neworder-label" for="info">Important Information</label>
+		    <textarea data-ng-model='info' class="form-control neworder-textarea" id="info"> Important detail about their personality which could turn into a factory when selecting gift ideas.</textarea>
 		</div>
-
-
+		<button style="margin-bottom:50px; margin-top:30px; float: right;" type='submit' class="btn btn-primary"> Save </button>
 	</form>
+
+
 </section>

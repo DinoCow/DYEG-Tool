@@ -10,6 +10,9 @@ angular.module('mean').config(['$routeProvider',
         when('/order/new',{
             templateUrl: 'views/neworder.html'
         }).
+        when('/order/:id', {
+            templateUrl: 'views/order.html'
+        }).
         otherwise({
             redirectTo: '/'
         });

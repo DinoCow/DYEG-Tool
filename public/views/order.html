@@ -1,0 +1,32 @@
+<section data-ng-controller="OrderController">
+	<h1 style="float:left">Order {{order._id}}</h1>
+	<div style="clear:both; width:50%;">
+		<p> Owner: {{order.owner}}</p>
+		<p> Name: {{order.gifter.name}}</p>
+		<p> Gender: {{order.gifter.gender}}</p>
+		<p> Date Due: {{order.dueDate}}</p>
+		<p> Age: {{order.gifter.age}}</p>
+		<hr/>
+		<b>Recipient</b>
+		<p> Occasion: {{order.occasion}}</p>
+		<p> Gender: {{order.recipient.gender}}</p>
+		<p> Age: {{order.recipient.age}}</p>
+		<p> Interests: {{order.recipient.interests}}</p>
+		<p> Important Info: {{order.info}}</p>
+	</div>
+
+	<hr/>
+
+	<div>
+		<b>Gift Lists </b>
+
+	</div>
+
+	<hr/>
+	<div>
+		<b>Gift Purchased</b>
+
+	</div>
+
+
+</section>

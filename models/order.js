@@ -9,10 +9,10 @@ var mongoose = require('mongoose'),
 var OrderSchema = new Schema({
     info: { type: String, default: '', trim: true },
     occasion: { type: String, default: '', trim: true }, 
-    dueDate: Date,
+    dueDate: String,
     dateCreated: { type: Date, default: Date.now },
     giftLists: { type: [ Schema.Types.ObjectId ], default:[]},
-    giftPurchased: { type: [ String ], default:[] },
+    giftPurchased: { type: [ Schema.Types.ObjectId ], default:[] },
     owner: String,
     gifter: {
         name: String,
