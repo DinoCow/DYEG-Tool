@@ -11,4 +11,12 @@ angular.module('mean.system').controller('OrderController', ['$scope', '$routePa
     	$scope.order = data;
     });
 
+    $scope.AddGiftList= function(){
+
+    }
+
+    $scope.CompleteOrder = function(){
+    	
+    }
+
 }]);

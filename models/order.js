@@ -24,7 +24,7 @@ var OrderSchema = new Schema({
         age: Number,
         interests: [String]
     },
-    status: {type: String, default: "Defined"}
+    status: {type: String, default: "In-Progress"}
 });
 
 /**

@@ -19,14 +19,55 @@
 
 	<div>
 		<b>Gift Lists </b>
-
+		<button data-toggle="modal" data-target="#GiftList" style="float:right" class="btn btn-success"> Add New Gift List</button>
 	</div>
 
 	<hr/>
 	<div>
 		<b>Gift Purchased</b>
-
+		<button data-toggle="modal" data-target="#Complete" style="float:right" class="btn btn-danger"> Set Order To Complete</button>
 	</div>
 
+	<!-- GiftList Modal -->
+	<div class="modal fade" id="GiftList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+			<h2>Add New Gift List</h2>
+	        <h4 class="modal-title" id="myModalLabel">Enter your gift list name below </h4>
+	      </div>
+	      <div class="modal-body">
+	        	<div class="input-group input-group-lg">
+			      <input type="text" class="form-control" id="giftListName" placeholder='Drinking with Hemingway' ng-model="giftListName">
+			      <span class="input-group-btn">
+			        <button id="modal-signup" class="btn btn-success" type="button" ng-onclick="AddGiftList()">Enter</button>
+			      </span>
+			    </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
+
+	<!-- Set Order To Complete Modal -->
+	<div class="modal fade" id="Complete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+			<h2>Set Order To Complete</h2>
+	        <h4 class="modal-title" id="myModalLabel">Enter the ASIN of the item(s) that were chosen.</h4>
+	      </div>
+	      <div class="modal-body">
+	        	<div class="input-group input-group-lg">
+			      <input type="text" class="form-control" id="OrderedItems" placeholder='B00C6ECZV0;X00C6ECZV5' ng-model="orderedItems">
+			      <span class="input-group-btn">
+			        <button id="modal-signup" class="btn btn-danger" type="button" onclick="CompleteOrder()">Submit</button>
+			      </span>
+			    </div>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
 
 </section>
