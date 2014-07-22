@@ -1,16 +1,75 @@
 'use strict';
 
-angular.module('mean.system').controller('GiftController', ['$scope','$http', 'Global', function ($scope, $http, Global) {
+angular.module('mean.system').controller('GiftController', ['$scope','$http', '$routeParams', 'Global', function ($scope, $http, $routeParams, Global) {
     $scope.global = Global;
-    var gifts = "B002LRTM0O,B0011MKW6I,B0088BMYN4,B00IYA2RAY,B00GW115SW,B00GOZE632,B00G9N3I7O,B007474Y04,B00FH9I0FQ,B00DR0PDNE",
-        url =  window.location.origin + '/gift?itemId=';
-    
-    url = url + gifts;
-    var responsePromise = $http.get(url);
-
+    $scope.orderId = $routeParams.orderId;
+    var responsePromise = $http.get( window.location.origin + '/api/order/' + $routeParams.orderId + '/giftList/' + $routeParams.giftListId);
 
     responsePromise.success(function(data, status){
-      $scope.gifts = data.Item;
-      console.log(data);
+    	console.log(data);
+    	$scope.giftList = data.gifts;
+    	$scope.name = data.name;
     });
+
+    $scope.search = function(){
+    	$scope.page = 1;
+   	    var responsePromise = $http.get( window.location.origin + '/api/gift?Keywords=' + $scope.searchTerm + "&" + $scope.page);
+
+    	responsePromise.success(function(data, status){
+    		var Item = data.Item;
+    		console.log(data);
+
+    		for(var i = 0; i < Item.length; i++){
+    			if (Item[i].ItemAttributes && Item[i].ItemAttributes.Title.length > 30){
+            		Item[i].ItemAttributes.Title = Item[i].ItemAttributes.Title.substr(0, 30).concat("...") ;
+        		}
+        	}
+   	 		$scope.searchedGift = Item;
+   	 		$scope.totalPage = data.TotalPages;
+    	});
+    }
+
+    $scope.nextpage = function(){
+    	$scope.page = $scope.page + 1;
+   	    var responsePromise = $http.get( window.location.origin + '/api/gift?Keywords=' + $scope.searchTerm + "&ItemPage=" + $scope.page);
+
+    	responsePromise.success(function(data, status){
+    		var Item = data.Item;
+    		console.log(data);
+
+    		for(var i = 0; i < Item.length; i++){
+    			if (Item[i].ItemAttributes && Item[i].ItemAttributes.Title.length > 30){
+            		Item[i].ItemAttributes.Title = Item[i].ItemAttributes.Title.substr(0, 30).concat("...") ;
+        		}
+        	}
+   	 		$scope.searchedGift = Item;
+   	 		$('html, body').animate({ scrollTop: 200 }, 'fast');
+    	});
+    }
+
+    $scope.addToList = function(item){
+    	var data = {
+            name: item.ItemAttributes.Title,
+            asin: item.ASIN,
+            url: item.DetailPageURL,
+            thumbnail: item.MediumImage.URL,
+            price: item.ItemAttributes.ListPrice.FormattedPrice
+        };
+
+        var responsePromise = $http.put( window.location.origin + '/api/giftList/' + $routeParams.giftListId + '/gift', data);
+        responsePromise.success(function(data, status){
+            console.log(data);
+            if(status == 200){
+                $scope.giftList.push(data);
+                alert("Added successfully!")
+            } else {
+                alert("Failed to create giftList!");
+            }
+        });
+    }
+
+    $scope.showNext = function(){
+    	return $scope.page >=1 && $scope.page < $scope.totalPage;
+    }
+
 }]);

@@ -1,7 +1,7 @@
 'use strict';
 var GiftList = require("../models/giftList");
 var Order = require("../models/order");
-
+var Gift = require("../models/gift");
 /**
  * Create a Order
  * put - /api/order/:id/giftList
@@ -49,15 +49,43 @@ exports.getGiftLists = function(req, res){
 
 /*
  * Get all orders:
- * - Get- /api/giftList/:id
+ * - Get- /api/order/:orderId/giftList/:giftListId
  * - send: {}
  * - receive: List
 */
 exports.getGiftListById = function(req, res){
-	var id = req.params.id;
+	var id = req.params.giftListId;
 	GiftList.findOne({_id: id}, function(err, giftList){
 		if (err) res.send({error:err});
-		res.send(giftList);
+		Gift.find({_id: { $in: giftList.gifts}}).exec(function(err, gifts){
+			res.send({gifts:gifts, name: giftList.name});
+		});
 	});
+}
+
+exports.addGift = function(req, res){
+	var id = req.params.id;
+	var gift = new Gift;
+    gift.name = req.body.name;
+    gift.asin = req.body.asin;
+    gift.url = req.body.url;
+    gift.thumbnail = req.body.thumbnail;
+    gift.price = req.body.price;
+
+    gift.save(function(err, gift){
+    	//if(err) res.send({error: err});
+    	var conditions = { _id: id }
+		, update = { $push: { gifts: gift._id }}
+		, options = { multi: false };
+
+		GiftList.update(conditions, update, options, callback);
+		function callback (err, numAffected) {
+			console.log(numAffected)
+	  		// numAffected is the number of updated documents
+	  		res.send(gift);
+	  	}
+    });
+
+
 }
 
