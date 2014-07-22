@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var GiftListSchema = new Schema({
-    gifts: [ Schema.Types.ObjectId ],
+    gifts: {type: [ Schema.Types.ObjectId ], default: []},
     name: String,
-    description: String
+    description: {type: String, default: ""}
 });
 
 /**

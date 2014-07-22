@@ -55,3 +55,15 @@ exports.getOrderById = function(req, res){
 	});
 }
 
+exports.completeOrder = function(req, res){
+	var conditions = { _id: req.params.id }
+		, update = { $set: { status: "Completed" }}
+		, options = { multi: false };
+
+	Order.update(conditions, update, options, callback);
+	function callback (err, numAffected) {
+  		// numAffected is the number of updated documents
+  		res.send({num: numAffected});
+  	}
+}
+
