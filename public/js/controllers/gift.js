@@ -68,8 +68,32 @@ angular.module('mean.system').controller('GiftController', ['$scope','$http', '$
         });
     }
 
+    $scope.remove = function(item){
+        var responsePromise = $http.delete( window.location.origin + '/api/giftList/' + $routeParams.giftListId + '/gift?giftId=' + item._id);
+        responsePromise.success(function(data, status){
+            if(status == 200){
+
+                var responsePromise = $http.get( window.location.origin + '/api/order/' + $routeParams.orderId + '/giftList/' + $routeParams.giftListId);
+
+                responsePromise.success(function(data, status){
+                    console.log(data);
+                    $scope.giftList = data.gifts;
+                    $scope.name = data.name;
+                });
+            } else {
+                alert("Failed to create giftList!");
+            }
+        });
+
+
+    }
+
     $scope.showNext = function(){
     	return $scope.page >=1 && $scope.page < $scope.totalPage;
+    }
+
+    $scope.showItem = function(item){
+        return item.ItemAttributes && item.DetailPageURL && item.MediumImage && item.ItemAttributes.Title && item.ItemAttributes.ListPrice;
     }
 
 }]);

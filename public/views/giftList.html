@@ -8,7 +8,8 @@
               <img ng-src={{gift.thumbnail}}>
               <p>{{gift.name}}</p>
               <p class="price">{{gift.price}}</p>
-            </a>
+          </a>
+          <button ng-click="remove(gift)" style="position: absolute; bottom: 10px; right: 10px;" class="btn btn-xs btn-danger"> Remove Me - </button>
         </li>
       </ul>
   </div>
@@ -18,13 +19,13 @@
     <button type="submit">Search</button>
   </form>
   <ul id="searched-List">
-      <li ng-show="gift.ItemAttributes" class="gift well" ng-repeat="gift in searchedGift">
+      <li ng-show="showItem(gift)" class="gift well" ng-repeat="gift in searchedGift">
         <a ng-href={{gift.DetailPageURL}}>
             <img ng-src={{gift.MediumImage.URL}}>
             <p>{{gift.ItemAttributes.Title}}</p>
             <p class="price">{{gift.ItemAttributes.ListPrice.FormattedPrice}}</p>
           </a>
-        <button ng-click="addToList(gift)" style="position: absolute; bottom: 10px; right: 10px;" class="btn btn-xs btn-success"> add me + </button>
+        <button ng-click="addToList(gift)" style="position: absolute; bottom: 10px; right: 10px;" class="btn btn-xs btn-success"> Add Me + </button>
       </li>
     </ul>
     <button style="margin-bottom:50px; float:right; clear: both;" ng-show="showNext()" ng-click="nextpage()" class="btn btn-default"> NextPage -></button>

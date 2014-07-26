@@ -89,3 +89,20 @@ exports.addGift = function(req, res){
 
 }
 
+exports.remove = function(req, res){
+	var id = req.params.id,
+	giftId = req.query.giftId;
+
+	var conditions = { _id: id }
+		, update = { $pull: { gifts: giftId }}
+		, options = { multi: false };
+
+	GiftList.update(conditions, update, options, callback);
+	Gift.findOne({_id: giftId}).remove().exec(callback);
+
+	function callback(err, numAffected){
+	}
+	res.send(200);
+
+}
+

@@ -9,4 +9,5 @@ module.exports = function(app) {
     app.put('/api/order/:id/giftList',auth, giftList.create);
     app.get('/api/order/:orderId/giftList/:giftListId',auth, giftList.getGiftListById);
     app.put('/api/giftList/:id/gift',auth, giftList.addGift);
+    app.delete('/api/giftList/:id/gift', auth, giftList.remove);
 };

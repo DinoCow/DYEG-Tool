@@ -3,7 +3,7 @@ border:1px;
 height:275px;
 float:left;
 padding: 20px;
-margin-right: 20px;
+margin-right: 18px;
 width: 200px;
 position:relative;
 }
@@ -15,14 +15,10 @@ bottom:0;
 
 #gift-list{
 list-style-type: none;
-height:300px;
-width:100%;
-overflow:scroll;
-overflow-x: scroll;
 overflow-y: hidden;
-white-space:nowrap;
 border-style: solid;
-border-width: medium;
+border-width: thin;
+width:100%;
 }
 
 #searched-List{
