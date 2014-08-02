@@ -10,4 +10,5 @@ module.exports = function(app) {
     app.get('/api/order/:orderId/giftList/:giftListId',auth, giftList.getGiftListById);
     app.put('/api/giftList/:id/gift',auth, giftList.addGift);
     app.delete('/api/giftList/:id/gift', auth, giftList.remove);
+    app.put('/api/giftList/:id/giftASIN', auth, giftList.addGiftByASIN);
 };

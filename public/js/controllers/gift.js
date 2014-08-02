@@ -67,6 +67,21 @@ angular.module('mean.system').controller('GiftController', ['$scope','$http', '$
             }
         });
     }
+    $scope.addASINToList = function(){
+        var data = {
+            itemId : $scope.asin
+        }
+        var responsePromise = $http.put( window.location.origin + '/api/giftList/' + $routeParams.giftListId + '/giftASIN', data);
+        responsePromise.success(function(data, status){
+            console.log(data);
+            if(status == 200){
+                $scope.giftList.push(data);
+                $('#ASINModal').modal('hide');
+            } else {
+                alert("Failed to create giftList!");
+            }
+        });
+    }
 
     $scope.remove = function(item){
         var responsePromise = $http.delete( window.location.origin + '/api/giftList/' + $routeParams.giftListId + '/gift?giftId=' + item._id);

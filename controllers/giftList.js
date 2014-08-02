@@ -2,6 +2,11 @@
 var GiftList = require("../models/giftList");
 var Order = require("../models/order");
 var Gift = require("../models/gift");
+var aws = require("aws-lib");
+
+var AWSAccessKeyId = "AKIAIAFNGLJVXRKCLECA",
+	AWSSecretKey="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";
+
 /**
  * Create a Order
  * put - /api/order/:id/giftList
@@ -87,6 +92,41 @@ exports.addGift = function(req, res){
     });
 
 
+}
+
+exports.addGiftByASIN = function(req,res){
+	var id = req.params.id;
+	var prodAdv = aws.createProdAdvClient(AWSAccessKeyId, AWSSecretKey, "canyouevengif-20");
+
+	prodAdv.call(
+		"ItemLookup", { 
+			ItemId: req.body.itemId,
+			ResponseGroup : "Medium"
+		}, 
+		function(err, result) {
+   			//console.log(JSON.stringify(result));
+   			var item = result.Items.Item;
+			var gift = new Gift;
+		    gift.name = item.ItemAttributes.Title;
+		    gift.asin = item.ASIN;
+		    gift.url = item.DetailPageURL;
+		    gift.thumbnail = item.MediumImage.URL;
+		    gift.price = item.ItemAttributes.ListPrice.FormattedPrice;
+
+		    gift.save(function(err, gift){
+		    	//if(err) res.send({error: err});
+		    	var conditions = { _id: id }
+				, update = { $push: { gifts: gift._id }}
+				, options = { multi: false };
+
+				GiftList.update(conditions, update, options, callback);
+				function callback (err, numAffected) {
+					//console.log(numAffected)
+			  		// numAffected is the number of updated documents
+			  		res.send(gift);
+			  	}
+	    });
+	});
 }
 
 exports.remove = function(req, res){

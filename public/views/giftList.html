@@ -1,6 +1,7 @@
 <section data-ng-controller="GiftController">
   <h4>Order id: {{orderId}} - {{name}}</h4>
   <!-- gift list -->
+  <button data-toggle="modal" data-target="#ASINModal" style="float:right" class="btn btn-success"> Add Item by ASIN</button>  
   <div>
     <ul id="gift-list">
         <li class="gift well" ng-repeat="gift in giftList">
@@ -29,4 +30,25 @@
       </li>
     </ul>
     <button style="margin-bottom:50px; float:right; clear: both;" ng-show="showNext()" ng-click="nextpage()" class="btn btn-default"> NextPage -></button>
+
+
+  <div class="modal fade" id="ASINModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+      <h2>Add Item by ASIN</h2>
+          <h4 class="modal-title" id="myModalLabel">Enter your item's ASIN below, ensure this is from amazon.com and not other locale</h4>
+        </div>
+        <div class="modal-body">
+            <div class="input-group input-group-lg">
+            <input type="text" class="form-control" id="asin" ng-model="asin">
+            <span class="input-group-btn">
+              <button id="modal-signup" class="btn btn-success" type="button" ng-click="addASINToList()">Enter</button>
+            </span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </section>
