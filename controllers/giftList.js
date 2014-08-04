@@ -107,11 +107,11 @@ exports.addGiftByASIN = function(req,res){
    			//console.log(JSON.stringify(result));
    			var item = result.Items.Item;
 			var gift = new Gift;
-		    gift.name = item.ItemAttributes.Title;
-		    gift.asin = item.ASIN;
-		    gift.url = item.DetailPageURL;
-		    gift.thumbnail = item.MediumImage.URL;
-		    gift.price = item.ItemAttributes.ListPrice.FormattedPrice;
+		    if (item.ItemAttributes.Title) gift.name = item.ItemAttributes.Title;		  
+		 	gift.asin = item.ASIN;
+		    if (item.DetailPageURL) gift.url = item.DetailPageURL;
+		    if (item.MediumImage.URL) gift.thumbnail = item.MediumImage.URL;
+		    if (item.ItemAttributes.ListPrice.FormattedPrice) gift.price = item.ItemAttributes.ListPrice.FormattedPrice;
 
 		    gift.save(function(err, gift){
 		    	//if(err) res.send({error: err});
